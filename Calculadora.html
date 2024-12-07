@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="Es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora kwh</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <a href="#" class="logo"><ul>ENERGIA SOLAR</a></ul> 
+                <ul class="nav-links">
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="Energia_solar.html">¿Qué es la energia Solar?</a></li>
+                    <li><a href="Calculadora.html">Calculadora kwh</a></li>
+                    <li><a href="Dashboard.html">Dashboard</a></li>
+                    <li><a href="Graficas.html">Graficas</a></li>
+                    <li><a href="Datos_Historicos.html">Datos Historicos</a></li>
+                </ul>
+            </div>
+        </nav> 
+    </header>
+
+    <ul>
+        <h1>Estimación de Energía Renovable en el Consumo Eléctrico</h1>
+        <form id="energyForm">
+            <label for="totalConsumption">Consumo Eléctrico Total (kWh):</label>
+            <input type="number" id="totalConsumption" name="totalConsumption" required>
+            <button type="submit">Calcular</button>
+        </form>
+        <h2>Resultado</h2>
+        <p id="result"></p>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Año</th>
+                    <th>País</th>
+                    <th>Tipo de Energía</th>
+                    <th>Producción (GWh)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1965</td>
+                    <td>Estados Unidos</td>
+                    <td>Hidráulica</td>
+                    <td>50000</td>
+                </tr>
+                <tr>
+                    <td>1970</td>
+                    <td>Brasil</td>
+                    <td>Hidráulica</td>
+                    <td>60000</td>
+                </tr>
+                <tr>
+                    <td>1980</td>
+                    <td>Alemania</td>
+                    <td>Eólica</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>1990</td>
+                    <td>China</td>
+                    <td>Solar</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>2000</td>
+                    <td>India</td>
+                    <td>Biomasa</td>
+                    <td>3000</td>
+                </tr>
+                <tr>
+                    <td>2010</td>
+                    <td>España</td>
+                    <td>Eólica</td>
+                    <td>15000</td>
+                </tr>
+                <tr>
+                    <td>2020</td>
+                    <td>Japón</td>
+                    <td>Solar</td>
+                    <td>25000</td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <script>
+            document.getElementById('energyForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const totalConsumption = parseFloat(document.getElementById('totalConsumption').value);
+                const tableBody = document.querySelector('#dataTable tbody');
+                let totalRenewableProduction = 0;
+    
+                for (let row of tableBody.rows) {
+                    const production = parseFloat(row.cells[3].textContent);
+                    totalRenewableProduction += production;
+                }
+    
+                const renewablePercentage = (totalRenewableProduction / totalConsumption) * 100;
+                document.getElementById('result').textContent = `El porcentaje de energía renovable en el consumo eléctrico total es: ${renewablePercentage.toFixed(2)}%`;
+            });
+        </script>
+    </ul>
+</body>
+</html>

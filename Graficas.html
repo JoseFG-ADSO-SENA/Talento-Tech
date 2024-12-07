@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="Es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard & Graficas</title>
+    <link rel="stylesheet" href="style2.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding: 0px;
+            }
+            canvas {
+                margin: 20px auto;
+                max-width: 800px;
+            }
+        </style>
+    </script>
+
+    <header>
+        <nav>
+            <div class="container">
+                <a href="#" class="logo"><ul>ENERGIA SOLAR</a></ul> 
+                <ul class="nav-links">
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="Energia_solar.html">¿Qué es la energia Solar?</a></li>
+                    <li><a href="Calculadora.html">Calculadora kwh</a></li>
+                    <li><a href="Dashboard.html">Dashboard</a></li>
+                    <li><a href="Graficas.html">Graficas</a></li>
+                    <li><a href="Datos_Historicos.html">Datos Historicos</a></li>
+                </ul>
+            </div>
+        </nav> 
+    </header>
+    <h1>Gráficos de Energía Solar</h1>
+    <!-- Gráfico de Barras -->
+    <h2>Producción de Energía Solar (1965-2022)</h2>
+    <canvas id="barChart"></canvas>
+
+      <!-- Gráfico de Torta -->
+      <h2>Participación de Energía Solar</h2>
+      <canvas id="pieChart"></canvas>
+
+        <!-- Gráfico de Torta -->
+    <h2>Participación de Energía Solar</h2>
+    <canvas id="lineChart"></canvas>
+    <script>
+        // Datos simulados (reemplazar con los reales)
+        const years = Array.from({length: 58}, (_, i) => 1965 + i); // Años de 1965 a 2022
+        const production = years.map(y => Math.random() * 100); // Datos ficticios de producción
+        const capacity = years.map(y => Math.random() * 500); // Datos ficticios de capacidad instalada
+
+        // Datos para el gráfico de torta
+        const solarShare = 25; // Porcentaje de energía solar
+        const otherShare = 75; // Porcentaje de otras fuentes
+
+        // Configuración del Gráfico de Barras
+        new Chart(document.getElementById("barChart"), {
+            type: 'bar',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Producción de Energía Solar (GWh)',
+                    data: production,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Año' } },
+                    y: { title: { display: true, text: 'Producción (GWh)' } }
+                }
+            }
+        });
+
+        // Configuración del Gráfico de Torta
+        new Chart(document.getElementById("pieChart"), {
+            type: 'pie',
+            data: {
+                labels: ['Energía Solar', 'Otras Fuentes'],
+                datasets: [{
+                    data: [solarShare, otherShare],
+                    backgroundColor: ['#36a2eb', '#ff6384']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true }
+                }
+            }
+        });
+
+        // Configuración del Gráfico de Líneas
+        new Chart(document.getElementById("lineChart"), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Capacidad Instalada (MW)',
+                    data: capacity,
+                    borderColor: '#4caf50',
+                    backgroundColor: 'rgba(76, 175, 80, 0.5)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Año' } },
+                    y: { title: { display: true, text: 'Capacidad (MW)' } }
+                }
+            }
+        });
+    </script>       
+</body>
+</html>
